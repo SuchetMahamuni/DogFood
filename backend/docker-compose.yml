@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  backend:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - FLASK_APP=run.py
+      - FLASK_ENV=development
+      - DATABASE_URL=mysql+pymysql://dogfood_user:dogfood_pass@db:3306/dogfood_db
+      - SECRET_KEY=development-secret-key
+      - JWT_SECRET_KEY=development-jwt-secret
+    volumes:
+      - .:/app
+    depends_on:
+      db:
+        condition: service_healthy
+    command: flask run --host=0.0.0.0 --port=8000 --reload
+
+  db:
+    image: mysql:8.4
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE=dogfood_db
+      - MYSQL_USER=dogfood_user
+      - MYSQL_PASSWORD=dogfood_pass
+      - MYSQL_ROOT_PASSWORD=root_pass
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  db_data:
