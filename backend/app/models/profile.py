@@ -14,6 +14,8 @@ class Profile(db.Model):
     preferred_role = db.Column(db.String(100))
     availability = db.Column(db.String(100))
     previous_projects = db.Column(db.Text)
+    hackathons_won = db.Column(db.Integer, default=0)
+    hackathons_participated = db.Column(db.Integer, default=0)
     
     user = db.relationship('User', back_populates='profile')
 

@@ -40,6 +40,23 @@ export const teamService = {
   },
 
   /**
+   * Fetch the current user's team for a specific event.
+   * GET /api/events/:eventId/my-team
+   */
+  async getMyTeamForEvent(eventId: number): Promise<Team | null> {
+    try {
+      const response = await apiClient.get<{ success: boolean; data: Team | null }>(`/api/events/${eventId}/my-team`)
+      if (response.data?.success && response.data.data) {
+        this.setActiveTeamId(response.data.data.id)
+        return response.data.data
+      }
+      return null
+    } catch {
+      return null
+    }
+  },
+
+  /**
    * Fetch a specific team.
    * GET /api/teams/:teamId
    */
@@ -60,11 +77,12 @@ export const teamService = {
    * Invite a user to a team.
    * POST /api/teams/:teamId/invite
    */
-  async inviteMember(teamId: number, inviteeId: number): Promise<TeamInvitation> {
+  async inviteMember(teamId: number, identifier: string | number): Promise<TeamInvitation> {
     try {
+      const payload = typeof identifier === 'number' ? { invitee_id: identifier } : { identifier }
       const response = await apiClient.post<{ success: boolean; data: TeamInvitation }>(
         `/api/teams/${teamId}/invite`,
-        { invitee_id: inviteeId }
+        payload
       )
       if (response.data?.success && response.data.data) {
         return response.data.data

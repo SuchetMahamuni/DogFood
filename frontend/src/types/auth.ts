@@ -10,6 +10,8 @@ export interface Profile {
   preferred_role?: string
   availability?: string
   previous_projects?: string
+  hackathons_won?: number
+  hackathons_participated?: number
 }
 
 export interface User {

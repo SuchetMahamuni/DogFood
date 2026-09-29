@@ -18,6 +18,7 @@ export default function DashboardPage() {
   const [events, setEvents] = useState<Event[]>([])
   const [activeEvent, setActiveEvent] = useState<Event | null>(null)
   const [activeTeam, setActiveTeam] = useState<Team | null>(null)
+  const [myTeamsMap, setMyTeamsMap] = useState<Record<number, Team | null>>({})
   const [guidancePreview, setGuidancePreview] = useState<GuidanceResource[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
@@ -39,10 +40,18 @@ export default function DashboardPage() {
         setActiveEvent(live)
         setGuidancePreview(guidance.slice(0, 2))
 
-        const activeTeamId = teamService.getActiveTeamId() || 1
-        const team = await teamService.getTeam(activeTeamId)
-        if (mounted) {
-          setActiveTeam(team)
+        const tMap: Record<number, Team | null> = {}
+        await Promise.all(
+          eventList.map(async (ev) => {
+            const tm = await teamService.getMyTeamForEvent(ev.id)
+            tMap[ev.id] = tm
+          })
+        )
+        if (!mounted) return
+        setMyTeamsMap(tMap)
+
+        if (live && tMap[live.id]) {
+          setActiveTeam(tMap[live.id])
         }
       } catch {
         // Fallbacks handled gracefully
@@ -216,7 +225,7 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* MY HACKATHONS */}
+            {/* MY HACKATHONS */}
       <div className="pt-4">
         <h3 className="text-base font-bold text-white mb-4 flex items-center gap-2">
           <History className="h-4.5 w-4.5 text-primary" />
@@ -224,57 +233,59 @@ export default function DashboardPage() {
         </h3>
         
         <div className="space-y-3">
-          {events.map((ev, idx) => {
-            const isCurrentEvent = activeEvent?.id === ev.id
-            const evStatus = getEventStatusBadge(ev.status)
-            const teamName = isCurrentEvent && activeTeam ? activeTeam.name : idx === 1 ? 'Team Alpha' : 'Solo'
-            const projectTitle = isCurrentEvent && proj ? proj.title : idx === 1 ? 'AI Project' : '—'
-            const submissionState = isCurrentEvent && proj?.is_submitted
-              ? 'Submitted'
-              : isCurrentEvent && proj
-                ? 'In Progress'
-                : ev.status === 'COMPLETED'
-                  ? 'Final Score: 88.5'
-                  : 'Open'
-            
-            return (
-              <div 
-                key={ev.id}
-                onClick={() => navigate(`/events/${ev.id}`)}
-                className="p-4 rounded-xl bg-surface-elevated/40 border border-white/5 hover:border-white/20 hover:bg-surface-elevated/60 transition-colors cursor-pointer flex flex-col md:flex-row md:items-center justify-between gap-4"
-              >
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-1">
-                    <span className="font-bold text-white">{ev.name}</span>
-                    <span className={`inline-flex items-center gap-1 text-[10px] font-mono px-2 py-0.5 rounded-full border ${evStatus.className}`}>
-                      <span className={`h-1.5 w-1.5 rounded-full ${evStatus.dot}`} />
-                      {evStatus.label}
-                    </span>
+          {events.filter(ev => myTeamsMap[ev.id]).length === 0 ? (
+            <div className="text-center py-10 px-4 rounded-xl border border-dashed border-white/10 bg-card/40">
+              <p className="text-sm font-bold text-white mb-1">You're not participating in any hackathons yet.</p>
+              <Button asChild variant="link" className="text-primary hover:text-primary-light p-0 h-auto font-bold">
+                <Link to="/events">Explore Hackathons</Link>
+              </Button>
+            </div>
+          ) : (
+            events.filter(ev => myTeamsMap[ev.id]).map((ev) => {
+              const team = myTeamsMap[ev.id]
+              if (!team) return null;
+              const evStatus = getEventStatusBadge(ev.status)
+              const project = team.project
+              const submissionState = project?.is_submitted ? 'Submitted' : project ? 'In Progress' : 'Open'
+              
+              return (
+                <div 
+                  key={ev.id}
+                  onClick={() => navigate(`/events/${ev.id}`)}
+                  className="p-4 rounded-xl bg-surface-elevated/40 border border-white/5 hover:border-white/20 hover:bg-surface-elevated/60 transition-colors cursor-pointer flex flex-col md:flex-row md:items-center justify-between gap-4"
+                >
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-1">
+                      <span className="font-bold text-white">{ev.name}</span>
+                      <span className={`inline-flex items-center gap-1 text-[10px] font-mono px-2 py-0.5 rounded-full border ${evStatus.className}`}>
+                        <span className={`h-1.5 w-1.5 rounded-full ${evStatus.dot}`} />
+                        {evStatus.label}
+                      </span>
+                    </div>
+                    <div className="text-xs text-slate-400 font-mono flex items-center gap-4">
+                      <span className="flex items-center gap-1">
+                        <Users className="h-3 w-3" /> {team.name}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <FolderKanban className="h-3 w-3" /> {project ? project.title : '-'}
+                      </span>
+                    </div>
                   </div>
-                  <div className="text-xs text-slate-400 font-mono flex items-center gap-4">
-                    <span className="flex items-center gap-1">
-                      <Users className="h-3 w-3" /> {teamName}
+                  
+                  <div className="shrink-0 flex items-center justify-between md:flex-col md:items-end gap-1">
+                    <span className={`text-xs font-mono font-semibold ${project?.is_submitted ? 'text-emerald-400' : 'text-slate-300'}`}>
+                      {submissionState}
                     </span>
-                    <span className="flex items-center gap-1">
-                      <FolderKanban className="h-3 w-3" /> {projectTitle}
+                    <span className="text-[10px] text-slate-500 font-mono">
+                      {new Date(ev.start_time).toLocaleDateString()}
                     </span>
                   </div>
                 </div>
-                
-                <div className="shrink-0 flex items-center justify-between md:flex-col md:items-end gap-1">
-                  <span className={`text-xs font-mono font-semibold ${isCurrentEvent && proj?.is_submitted ? 'text-emerald-400' : 'text-slate-300'}`}>
-                    {submissionState}
-                  </span>
-                  <span className="text-[10px] text-slate-500 font-mono">
-                    {new Date(ev.start_time).toLocaleDateString()}
-                  </span>
-                </div>
-              </div>
-            )
-          })}
+              )
+            })
+          )}
         </div>
       </div>
-
     </div>
   )
 }

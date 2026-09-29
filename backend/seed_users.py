@@ -21,7 +21,12 @@ with app.app_context():
             u = User(email=email, name=name, password_hash=hash_password("password123"), role=role)
             db.session.add(u)
             db.session.flush()
-            p = Profile(user_id=u.id, display_name=name)
+            p = Profile(
+                user_id=u.id, 
+                display_name=name,
+                hackathons_participated=3 if role == 'PARTICIPANT' else 0,
+                hackathons_won=1 if role == 'PARTICIPANT' else 0
+            )
             db.session.add(p)
     db.session.commit()
     print("Users seeded!")

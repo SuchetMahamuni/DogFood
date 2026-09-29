@@ -24,6 +24,17 @@ def create_team(event_id):
         
     return jsonify({'success': True, 'data': team_schema.dump(team)}), 201
 
+@teams_bp.route('/events/<int:event_id>/my-team', methods=['GET'])
+@require_auth
+def get_my_team_for_event(event_id):
+    from app.models.team import Team
+    from app.models.team_member import TeamMember
+    member = TeamMember.query.join(Team).filter(Team.event_id == event_id, TeamMember.user_id == request.user.id).first()
+    if not member:
+        return jsonify({'success': True, 'data': None}), 200
+    team = TeamService.get_team(member.team_id)
+    return jsonify({'success': True, 'data': team_schema.dump(team)}), 200
+
 @teams_bp.route('/teams/<int:team_id>', methods=['GET'])
 @require_auth
 def get_team(team_id):
@@ -35,11 +46,30 @@ def get_team(team_id):
 @teams_bp.route('/teams/<int:team_id>/invite', methods=['POST'])
 @require_auth
 def invite_member(team_id):
-    invitee_id = request.json.get('invitee_id')
-    if not invitee_id:
-         return jsonify({'success': False, 'error': {'code': 'BAD_REQUEST', 'message': 'invitee_id is required.'}}), 400
+    from app.models.user import User
+    data = request.json or {}
+    invitee_id = data.get('invitee_id')
+    identifier = data.get('identifier')
+
+    user_to_invite = None
+    if invitee_id:
+        user_to_invite = User.query.get(invitee_id)
+    elif identifier:
+        user_to_invite = User.query.filter_by(email=identifier).first()
+        if not user_to_invite:
+            try:
+                # Fallback if they typed an ID as string
+                user_to_invite = User.query.get(int(identifier))
+            except ValueError:
+                pass
+
+    if not user_to_invite:
+         return jsonify({'success': False, 'error': {'code': 'BAD_REQUEST', 'message': 'Please provide a valid participant user ID or email.'}}), 400
          
-    invite, error = TeamService.invite_member(team_id, request.user.id, invitee_id)
+    if user_to_invite.role != 'PARTICIPANT':
+         return jsonify({'success': False, 'error': {'code': 'BAD_REQUEST', 'message': 'Only participants can be invited to a team.'}}), 400
+
+    invite, error = TeamService.invite_member(team_id, request.user.id, user_to_invite.id)
     if error:
         return jsonify({'success': False, 'error': {'code': 'BAD_REQUEST', 'message': error}}), 400
         

@@ -109,8 +109,9 @@ export default function App() {
             <Route path="/discover"           element={<DiscoverPage />} />
             <Route path="/profile"            element={<ProfilePage />} />
             <Route path="/teams"              element={<TeamsPage />} />
-            <Route path="/team"               element={<TeamPage />} />
-            <Route path="/team/invitations"   element={<TeamInvitationsPage />} />
+            <Route path="/team"               element={<TeamsPage />} />
+            <Route path="/team/:eventId"      element={<TeamPage />} />
+            <Route path="/team/:eventId/invitations" element={<TeamInvitationsPage />} />
             <Route path="/project"            element={<ProjectPage />} />
             <Route path="/project/:projectId" element={<ProjectDetailsPage />} />
             <Route path="/guidance"           element={<GuidancePage />} />

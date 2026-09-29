@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Mail, Check, X, ArrowLeft, Users, Calendar, AlertCircle, CheckCircle2, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -8,6 +8,7 @@ import type { TeamInvitation } from '@/types/participant'
 import { getApiErrorMessage } from '@/services/apiClient'
 
 export default function TeamInvitationsPage() {
+  const { eventId } = useParams<{ eventId: string }>()
   const navigate = useNavigate()
   const [invitations, setInvitations] = useState<TeamInvitation[]>([])
   const [isLoading, setIsLoading] = useState(true)
@@ -76,7 +77,7 @@ export default function TeamInvitationsPage() {
       {/* Contextual Back Navigation */}
       <div>
         <Link
-          to="/team"
+          to={`/team/${eventId || ''}`}
           className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-slate-400 hover:text-white transition-colors group"
         >
           <ArrowLeft className="h-3.5 w-3.5 group-hover:-translate-x-1 transition-transform" />
@@ -133,7 +134,7 @@ export default function TeamInvitationsPage() {
           </p>
           <div className="mt-5 flex items-center justify-center gap-3">
             <Button asChild size="sm" variant="outline" className="text-xs font-semibold border-white/10 text-slate-200 hover:text-white">
-              <Link to="/team">Create Team</Link>
+              <Link to={`/team/${eventId || ''}`}>Create Team</Link>
             </Button>
             <Button asChild size="sm" className="text-xs font-bold bg-primary hover:bg-primary-hover text-white border border-primary/30 glow-brand">
               <Link to="/discover">Discover Hackers</Link>

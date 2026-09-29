@@ -141,6 +141,20 @@ export default function ProfilePage() {
 
           <div className="space-y-3 text-xs">
             <div className="flex items-center justify-between p-3.5 rounded-xl bg-[#0F1522] border border-slate-800/80">
+              <span className="text-slate-400 font-medium">Hackathons Won</span>
+              <span className="font-mono font-extrabold text-emerald-400">
+                {profile.hackathons_won ?? 0}
+              </span>
+            </div>
+            
+            <div className="flex items-center justify-between p-3.5 rounded-xl bg-[#0F1522] border border-slate-800/80">
+              <span className="text-slate-400 font-medium">Hackathons Participated</span>
+              <span className="font-mono font-bold text-primary">
+                {profile.hackathons_participated ?? 0}
+              </span>
+            </div>
+
+            <div className="flex items-center justify-between p-3.5 rounded-xl bg-[#0F1522] border border-slate-800/80">
               <span className="text-slate-400 font-medium">Preferred Track / Role</span>
               <span className="font-mono font-bold text-white">
                 {profile.preferred_role || 'Full-Stack Developer'}

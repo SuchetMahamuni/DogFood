@@ -1,6 +1,11 @@
 from marshmallow import Schema, fields, validate
 
 class ProfileSchema(Schema):
+    id = fields.Integer(dump_only=True)
+    user_id = fields.Integer(dump_only=True)
+    name = fields.String(attribute='user.name', dump_only=True)
+    email = fields.String(attribute='user.email', dump_only=True)
+    role = fields.String(attribute='user.role', dump_only=True)
     display_name = fields.String(validate=validate.Length(max=100))
     bio = fields.String()
     profile_picture_url = fields.String(validate=validate.Length(max=255))
@@ -10,6 +15,8 @@ class ProfileSchema(Schema):
     preferred_role = fields.String(validate=validate.Length(max=100))
     availability = fields.String(validate=validate.Length(max=100))
     previous_projects = fields.String()
+    hackathons_won = fields.Integer()
+    hackathons_participated = fields.Integer()
 
 class UserSchema(Schema):
     id = fields.Integer(dump_only=True)

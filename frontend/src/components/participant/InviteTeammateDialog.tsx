@@ -17,13 +17,15 @@ import { getApiErrorMessage } from '@/services/apiClient'
 
 interface InviteTeammateDialogProps {
   teamId: number
+  teamName?: string
+  eventName?: string
   user: DiscoveredUser | null
   open: boolean
   onClose: () => void
   onSuccess?: () => void
 }
 
-export function InviteTeammateDialog({ teamId, user, open, onClose, onSuccess }: InviteTeammateDialogProps) {
+export function InviteTeammateDialog({ teamId, teamName, eventName, user, open, onClose, onSuccess }: InviteTeammateDialogProps) {
   const [inviteeId, setInviteeId] = useState<string>(user?.user_id?.toString() || user?.id?.toString() || '')
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -34,16 +36,19 @@ export function InviteTeammateDialog({ teamId, user, open, onClose, onSuccess }:
     setError(null)
     setSuccessMsg(null)
 
-    const targetId = parseInt(inviteeId, 10)
-    if (isNaN(targetId) || targetId <= 0) {
-      setError('Please provide a valid participant user ID.')
+    const identifier = inviteeId.trim()
+    if (!identifier) {
+      setError('Please provide a valid participant email or user ID.')
       return
     }
 
     setIsLoading(true)
     try {
-      await teamService.inviteMember(teamId, targetId)
-      setSuccessMsg(`Invitation successfully dispatched to user #${targetId}!`)
+      const parsedId = parseInt(identifier, 10)
+      const payload = (!isNaN(parsedId) && parsedId.toString() === identifier) ? parsedId : identifier
+      
+      await teamService.inviteMember(teamId, payload)
+      setSuccessMsg(`Invitation successfully dispatched!`)
       if (onSuccess) onSuccess()
       setTimeout(() => {
         onClose()
@@ -56,7 +61,7 @@ export function InviteTeammateDialog({ teamId, user, open, onClose, onSuccess }:
     }
   }
 
-  const name = user?.display_name || user?.name || `User #${inviteeId}`
+  const name = user?.display_name || user?.name || `User`
 
   return (
     <Dialog open={open} onOpenChange={(isOpen: boolean) => !isOpen && onClose()}>
@@ -67,7 +72,12 @@ export function InviteTeammateDialog({ teamId, user, open, onClose, onSuccess }:
           </div>
           <DialogTitle>Invite to Team</DialogTitle>
           <DialogDescription>
-            Send an invitation to join your hackathon team. They will receive it in their pending invites.
+            {teamName && eventName ? (
+              <>Invite a participant to join <strong className="text-white">{teamName}</strong> for <strong className="text-white">{eventName}</strong>.</>
+            ) : (
+              <>Send an invitation to join your hackathon team.</>
+            )}
+            They will receive it in their pending invites.
           </DialogDescription>
         </DialogHeader>
 
@@ -87,18 +97,18 @@ export function InviteTeammateDialog({ teamId, user, open, onClose, onSuccess }:
 
         <form onSubmit={handleInvite} className="space-y-4">
           <div className="space-y-1.5">
-            <Label htmlFor="inviteeId">Participant ID</Label>
+            <Label htmlFor="inviteeId">Participant Email or ID</Label>
             <Input
               id="inviteeId"
-              type="number"
-              placeholder="e.g. 5"
+              type="text"
+              placeholder="e.g. participant@example.com or 5"
               value={inviteeId}
               onChange={(e) => setInviteeId(e.target.value)}
               disabled={isLoading || !!user}
               required
             />
             {user && (
-              <p className="text-[11px] text-muted-foreground">
+              <p className="text-[11px] text-muted-foreground mt-1">
                 Inviting <span className="font-semibold text-foreground">{name}</span>
               </p>
             )}
@@ -108,7 +118,7 @@ export function InviteTeammateDialog({ teamId, user, open, onClose, onSuccess }:
             <Button type="button" variant="outline" size="sm" onClick={onClose} disabled={isLoading}>
               Cancel
             </Button>
-            <Button type="submit" size="sm" disabled={isLoading}>
+            <Button type="submit" size="sm" disabled={isLoading} className="bg-primary hover:bg-primary-hover text-white">
               {isLoading ? (
                 <>
                   <Loader2 className="h-4 w-4 animate-spin mr-1.5" />

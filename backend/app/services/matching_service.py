@@ -5,7 +5,7 @@ from app.models.user import User
 class MatchingService:
     @staticmethod
     def discover_users(filters, mode):
-        query = Profile.query.join(User).filter(User.active == True)
+        query = Profile.query.join(User).filter(User.active == True, User.role == 'PARTICIPANT')
         
         if mode == 'random':
             from sqlalchemy.sql.expression import func
@@ -50,7 +50,7 @@ class MatchingService:
 
     @staticmethod
     def get_matches(user_profile):
-        all_profiles = Profile.query.join(User).filter(User.active == True, Profile.id != user_profile.id).all()
+        all_profiles = Profile.query.join(User).filter(User.active == True, User.role == 'PARTICIPANT', Profile.id != user_profile.id).all()
         
         scored_profiles = []
         for p in all_profiles:

@@ -76,6 +76,11 @@ export function UserCard({ user, onViewProfile, onInvite, hasPendingInvite }: Us
 
         {/* Availability & Experience */}
         <div className="pt-2 border-t border-white/10 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] text-slate-400">
+          {user.hackathons_won !== undefined && user.hackathons_won > 0 && (
+            <span className="flex items-center gap-1 font-bold text-emerald-400" title="Hackathons Won">
+              🏆 {user.hackathons_won} Won
+            </span>
+          )}
           {user.experience && (
             <span className="flex items-center gap-1">
               <Briefcase className="h-3 w-3 text-slate-400" />

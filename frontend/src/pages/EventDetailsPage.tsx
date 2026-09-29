@@ -172,7 +172,7 @@ export default function EventDetailsPage() {
               </div>
 
               <Button asChild className="w-full bg-primary hover:bg-primary-hover text-white text-xs font-bold border border-primary/30 glow-brand" size="md">
-                <Link to="/team">
+                <Link to={`/team/${event.id}`}>
                   <Users className="h-4 w-4 mr-2" />
                   Manage Team
                 </Link>

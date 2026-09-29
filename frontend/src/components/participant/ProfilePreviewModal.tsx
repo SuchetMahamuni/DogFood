@@ -54,6 +54,18 @@ export function ProfilePreviewModal({ user, open, onClose, onInvite }: ProfilePr
         </DialogHeader>
 
         <div className="space-y-4 py-2 text-xs">
+          {/* Hackathon Stats */}
+          <div className="grid grid-cols-2 gap-2 mb-2">
+            <div className="p-2.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-center">
+              <p className="font-semibold text-emerald-400 uppercase tracking-wider text-[10px]">Hackathons Won</p>
+              <p className="font-extrabold text-lg text-emerald-300">{user.hackathons_won ?? 0}</p>
+            </div>
+            <div className="p-2.5 rounded-lg bg-primary/10 border border-primary/20 text-center">
+              <p className="font-semibold text-primary-light uppercase tracking-wider text-[10px]">Participated</p>
+              <p className="font-extrabold text-lg text-primary">{user.hackathons_participated ?? 0}</p>
+            </div>
+          </div>
+
           {/* Bio */}
           {user.bio && (
             <div>

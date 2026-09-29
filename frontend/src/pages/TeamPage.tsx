@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import {
   Users,
   UserPlus,
@@ -15,6 +15,8 @@ import {
   ChevronRight,
   ArrowLeft,
   Compass,
+  Copy,
+  Check,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
@@ -30,11 +32,13 @@ import { getApiErrorMessage } from '@/services/apiClient'
 import { getEventStatusBadge } from '@/components/participant/EventCard'
 
 export default function TeamPage() {
+  const { eventId: paramEventId } = useParams<{ eventId: string }>()
   const [team, setTeam] = useState<Team | null>(null)
   const [events, setEvents] = useState<Event[]>([])
-  const [selectedEventId, setSelectedEventId] = useState<number>(1)
+  const [selectedEventId, setSelectedEventId] = useState<number>(Number(paramEventId) || 1)
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [copiedId, setCopiedId] = useState(false)
 
   // Creation form state
   const [newTeamName, setNewTeamName] = useState('')
@@ -51,16 +55,15 @@ export default function TeamPage() {
     try {
       const allEvents = await eventService.getEvents()
       setEvents(allEvents)
-      if (allEvents.length > 0) {
-        setSelectedEventId(allEvents[0].id)
+      
+      let eventIdToLoad = selectedEventId
+      if (!eventIdToLoad && allEvents.length > 0) {
+        eventIdToLoad = allEvents[0].id
+        setSelectedEventId(eventIdToLoad)
       }
 
-      const activeId = teamService.getActiveTeamId()
-      if (activeId) {
-        const teamData = await teamService.getTeam(activeId)
-        setTeam(teamData)
-      } else {
-        const teamData = await teamService.getTeam(1)
+      if (eventIdToLoad) {
+        const teamData = await teamService.getMyTeamForEvent(eventIdToLoad)
         setTeam(teamData)
       }
     } catch {
@@ -129,17 +132,22 @@ export default function TeamPage() {
       {/* Contextual Back Navigation */}
       <div>
         <Link
-          to="/dashboard"
+          to="/team"
           className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-slate-400 hover:text-white transition-colors group"
         >
           <ArrowLeft className="h-3.5 w-3.5 group-hover:-translate-x-1 transition-transform" />
-          <span>← Back to Dashboard</span>
+          <span>← Back to My Team Workspaces</span>
         </Link>
       </div>
 
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
         <div>
+          <div className="flex items-center gap-2 mb-1.5">
+            <span className="text-[11px] font-mono text-slate-400 uppercase tracking-wider">
+              TARGET HACKATHON: <strong className="text-primary-light ml-1">{events.find(e => e.id === selectedEventId)?.name || 'Loading...'}</strong>
+            </span>
+          </div>
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white flex items-center gap-2.5">
             <Users className="h-7 w-7 text-primary" />
             Team Workspace
@@ -151,7 +159,7 @@ export default function TeamPage() {
 
         <div className="flex items-center gap-2.5">
           <Button asChild variant="outline" size="sm" className="text-xs font-semibold border-white/10 text-slate-200 hover:text-white hover:bg-surface-elevated">
-            <Link to="/team/invitations">
+            <Link to={`/team/${selectedEventId}/invitations`}>
               <Mail className="h-3.5 w-3.5 mr-1.5 text-slate-400" />
               Invitations
             </Link>
@@ -288,7 +296,21 @@ export default function TeamPage() {
                 <span className="text-[11px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 flex items-center gap-1 uppercase tracking-wider">
                   <ShieldCheck className="h-3.5 w-3.5 text-emerald-400" /> Active Team
                 </span>
-                <span className="text-xs font-mono text-slate-400">ID #{team.id}</span>
+                <div className="flex items-center gap-1.5 ml-2 bg-surface-elevated/50 px-2 py-1 rounded-md border border-white/10">
+                  <span className="text-[11px] font-mono text-slate-400">TEAM ID:</span>
+                  <strong className="text-sm font-mono text-white tracking-wider">{team.id}</strong>
+                  <button 
+                    title="Copy Team ID"
+                    onClick={() => {
+                      navigator.clipboard.writeText(team.id.toString())
+                      setCopiedId(true)
+                      setTimeout(() => setCopiedId(false), 2000)
+                    }}
+                    className="ml-1 p-1 hover:bg-white/10 rounded transition-colors text-slate-400 hover:text-white"
+                  >
+                    {copiedId ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Copy className="h-3.5 w-3.5" />}
+                  </button>
+                </div>
               </div>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
                 {team.name}
@@ -496,6 +518,8 @@ export default function TeamPage() {
       {team && (
         <InviteTeammateDialog
           teamId={team.id}
+          teamName={team.name}
+          eventName={events.find(e => e.id === selectedEventId)?.name}
           user={null}
           open={isInviteOpen}
           onClose={() => setIsInviteOpen(false)}

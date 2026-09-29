@@ -19,7 +19,7 @@ import { getEventStatusBadge } from '@/components/participant/EventCard'
 
 export default function TeamsPage() {
   const [events, setEvents] = useState<Event[]>([])
-  const [activeTeam, setActiveTeam] = useState<Team | null>(null)
+  const [teamsMap, setTeamsMap] = useState<Record<number, Team | null>>({})
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
@@ -27,13 +27,17 @@ export default function TeamsPage() {
     async function loadData() {
       setIsLoading(true)
       try {
-        const [eventList, team] = await Promise.all([
-          eventService.getEvents().catch(() => []),
-          teamService.getTeam(teamService.getActiveTeamId() || 1).catch(() => null),
-        ])
+        const eventList = await eventService.getEvents().catch(() => [])
+        const tMap: Record<number, Team | null> = {}
+        await Promise.all(
+          eventList.map(async (ev) => {
+            const tm = await teamService.getMyTeamForEvent(ev.id)
+            tMap[ev.id] = tm
+          })
+        )
         if (mounted) {
           setEvents(eventList)
-          setActiveTeam(team)
+          setTeamsMap(tMap)
         }
       } catch {
         // Fallbacks
@@ -78,9 +82,9 @@ export default function TeamsPage() {
         </div>
 
         <Button asChild size="sm" className="bg-primary hover:bg-primary-hover text-white font-bold text-xs">
-          <Link to="/team">
+          <Link to="/events">
             <Plus className="h-4 w-4 mr-1.5" />
-            Create / Manage Team
+            Join Hackathon
           </Link>
         </Button>
       </div>
@@ -105,10 +109,9 @@ export default function TeamsPage() {
         </div>
       ) : (
         <div className="space-y-6">
-          {events.map((ev, idx) => {
-            const isCurrent = idx === 0
+          {events.map((ev) => {
             const evStatus = getEventStatusBadge(ev.status)
-            const team = isCurrent ? activeTeam : null
+            const team = teamsMap[ev.id]
             const proj = team?.project
 
             return (
@@ -206,7 +209,7 @@ export default function TeamsPage() {
                   </span>
 
                   <Button asChild size="sm" className="bg-primary hover:bg-primary-hover text-white font-bold text-xs shadow-md">
-                    <Link to="/team">
+                    <Link to={`/team/${ev.id}`}>
                       Open Team Workspace
                       <ArrowRight className="h-3.5 w-3.5 ml-1.5" />
                     </Link>
