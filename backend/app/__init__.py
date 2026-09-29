@@ -1,6 +1,7 @@
 from flask import Flask
 from app.config import Config
 from app.extensions import db, migrate
+from flask_cors import CORS
 
 def create_app(config_class=Config):
     app = Flask(__name__)
@@ -27,5 +28,17 @@ def create_app(config_class=Config):
     app.register_blueprint(users_bp, url_prefix='/api/users')
     app.register_blueprint(guidance_bp, url_prefix='/api')
     app.register_blueprint(judging_bp, url_prefix='/api/judging')
+
+    CORS(
+        app,
+        resources={
+            r"/api/*": {
+                "origins": app.config["FRONTEND_URL"]
+            }
+        },
+        allow_headers=["Content-Type", "Authorization"],
+        methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    )
+
 
     return app
