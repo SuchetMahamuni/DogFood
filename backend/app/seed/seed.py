@@ -25,12 +25,12 @@ def seed_database():
         db.create_all()
         
         # 1. Users
-        admin = User(name='Admin', email='admin@dogfood.com', password_hash=hash_password('password'), role='ADMIN')
-        organizer = User(name='Organizer', email='org@dogfood.com', password_hash=hash_password('password'), role='ORGANIZER')
-        judge1 = User(name='Judge One', email='judge1@dogfood.com', password_hash=hash_password('password'), role='JUDGE')
-        judge2 = User(name='Judge Two', email='judge2@dogfood.com', password_hash=hash_password('password'), role='JUDGE')
-        part1 = User(name='Alice', email='alice@dogfood.com', password_hash=hash_password('password'), role='PARTICIPANT')
-        part2 = User(name='Bob', email='bob@dogfood.com', password_hash=hash_password('password'), role='PARTICIPANT')
+        admin = User(name='Admin', email='admin@example.com', password_hash=hash_password('password123'), role='ADMIN')
+        organizer = User(name='Organizer', email='organizer@example.com', password_hash=hash_password('password123'), role='ORGANIZER')
+        judge1 = User(name='Judge One', email='judge1@example.com', password_hash=hash_password('password123'), role='JUDGE')
+        judge2 = User(name='Judge Two', email='judge2@example.com', password_hash=hash_password('password123'), role='JUDGE')
+        part1 = User(name='Participant 1', email='participant1@example.com', password_hash=hash_password('password123'), role='PARTICIPANT')
+        part2 = User(name='Participant 2', email='participant2@example.com', password_hash=hash_password('password123'), role='PARTICIPANT')
         
         db.session.add_all([admin, organizer, judge1, judge2, part1, part2])
         db.session.commit()
