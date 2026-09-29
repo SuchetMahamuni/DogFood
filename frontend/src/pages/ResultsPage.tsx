@@ -57,7 +57,7 @@ const DEMO_STANDINGS: LeaderboardEntry[] = [
   {
     rank: 4,
     project_id: 4,
-    project_title: 'HyperLedger Fraud Engine',
+    project_title: 'HyperLedger Fraud System',
     team_name: 'FinTech Architects',
     final_score: 86.2,
     evaluation_count: 4,

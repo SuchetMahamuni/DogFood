@@ -65,7 +65,7 @@ export default function AdministrationPage() {
       }
     } catch (err: unknown) {
       const e = err as Error
-      setError(e.message || 'Failed to load administration telemetry.')
+      setError(e.message || 'Failed to load administration metrics.')
     } finally {
       setIsLoading(false)
     }
@@ -90,7 +90,7 @@ export default function AdministrationPage() {
             Platform Administration
           </h1>
           <p className="text-sm text-slate-400 mt-1">
-            Global system health, platform telemetry, and administrative management console.
+            Global system health, platform metrics, and administrative management dashboard.
           </p>
         </div>
 
@@ -155,7 +155,7 @@ export default function AdministrationPage() {
       {isLoading ? (
         <div className="flex items-center justify-center py-16 text-slate-400">
           <Loader2 className="h-6 w-6 animate-spin text-primary mr-2" />
-          <span className="text-xs font-mono">Loading administrative telemetry...</span>
+          <span className="text-xs font-mono">Loading administrative metrics...</span>
         </div>
       ) : (
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -281,7 +281,7 @@ export default function AdministrationPage() {
               </p>
             </div>
             <div className="pt-4 flex items-center text-xs font-mono text-emerald-400 font-semibold group-hover:translate-x-1 transition-transform">
-              Open Judging Telemetry →
+              Open Judging Metrics →
             </div>
           </Link>
 

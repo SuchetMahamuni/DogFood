@@ -52,7 +52,7 @@ export default function DiscoverPage() {
 
       // Teammate discovery should ONLY expose participants/builders (not Admin, Organizer, or Judges)
       const participantOnly = Array.from(userMap.values()).filter((u) => {
-        const role = (u.role || u.preferred_role || '').toUpperCase()
+        const role = (u.role || '').toUpperCase()
         if (role === 'ADMIN' || role === 'ORGANIZER' || role === 'JUDGE') {
           return false
         }

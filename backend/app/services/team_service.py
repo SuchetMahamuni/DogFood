@@ -106,3 +106,7 @@ class TeamService:
             
         db.session.commit()
         return True, None
+
+    @staticmethod
+    def get_my_invitations(user_id):
+        return TeamInvitation.query.filter_by(invitee_id=user_id, status='PENDING').all()

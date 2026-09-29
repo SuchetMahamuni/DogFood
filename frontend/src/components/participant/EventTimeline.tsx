@@ -15,7 +15,7 @@ export function EventTimeline({ event }: EventTimelineProps) {
   const steps = [
     {
       title: 'Registration & Team Formation',
-      description: 'Find teammates and assemble your squad',
+      description: 'Find teammates and assemble your team',
       date: start.toLocaleDateString(),
       completed: now >= start,
       active: now < start,

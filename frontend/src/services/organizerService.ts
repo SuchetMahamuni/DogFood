@@ -114,7 +114,7 @@ export const organizerService = {
   async getJudgeCandidates(): Promise<DiscoveredUser[]> {
     try {
       const users = await userService.discoverUsers()
-      return users.filter((u) => (u.role || u.preferred_role || '').toUpperCase() === 'JUDGE')
+      return users.filter((u) => (u.role || '').toUpperCase() === 'JUDGE')
     } catch {
       return []
     }
@@ -127,7 +127,7 @@ export const organizerService = {
   async getParticipantCandidates(): Promise<DiscoveredUser[]> {
     try {
       const users = await userService.discoverUsers()
-      return users.filter((u) => (u.role || u.preferred_role || '').toUpperCase() === 'PARTICIPANT')
+      return users.filter((u) => (u.role || '').toUpperCase() === 'PARTICIPANT')
     } catch {
       return []
     }

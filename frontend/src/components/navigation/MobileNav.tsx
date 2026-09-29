@@ -17,7 +17,7 @@ interface MobileNavProps {
 }
 
 /**
- * Mobile navigation drawer — dark/light adaptive console sheet with global appearance toggle.
+ * Mobile navigation drawer — dark/light adaptive dashboard sheet with global appearance toggle.
  */
 export function MobileNav({ role, isOpen, onClose }: MobileNavProps) {
   const sections = (role && roleNavMap[role]) ? roleNavMap[role] : roleNavMap.PARTICIPANT

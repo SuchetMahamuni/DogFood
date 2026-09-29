@@ -91,7 +91,7 @@ export default function LoginPage() {
             Sign In to DogFood
           </h1>
           <p className="text-xs text-muted-foreground max-w-xs leading-relaxed">
-            Access your developer workspace, squad collaboration rooms, and hackathon judging consoles.
+            Access your developer workspace, team collaboration rooms, and hackathon judging consoles.
           </p>
         </div>
 

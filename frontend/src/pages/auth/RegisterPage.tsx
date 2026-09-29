@@ -91,7 +91,7 @@ export default function RegisterPage() {
             Create Developer Account
           </h1>
           <p className="text-xs text-muted-foreground max-w-xs leading-relaxed">
-            Join the DogFood hackathon platform, assemble engineering squads, and compete for category prizes.
+            Join the DogFood hackathon platform, assemble engineering teams, and compete for category prizes.
           </p>
         </div>
 

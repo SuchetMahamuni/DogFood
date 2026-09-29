@@ -36,7 +36,7 @@ export default function TeamInvitationsPage() {
     try {
       const res = await teamService.acceptInvitation(invitationId)
       teamService.setActiveTeamId(teamId)
-      setFeedback({ type: 'success', message: res.message || 'Invitation accepted! Redirecting to squad...' })
+      setFeedback({ type: 'success', message: res.message || 'Invitation accepted! Redirecting to team...' })
       setInvitations((prev) => prev.filter((i) => i.id !== invitationId))
       setTimeout(() => {
         navigate('/team')
@@ -80,7 +80,7 @@ export default function TeamInvitationsPage() {
           className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-slate-400 hover:text-white transition-colors group"
         >
           <ArrowLeft className="h-3.5 w-3.5 group-hover:-translate-x-1 transition-transform" />
-          <span>← Back to Squad Workspace</span>
+          <span>← Back to Team Workspace</span>
         </Link>
       </div>
 
@@ -89,7 +89,7 @@ export default function TeamInvitationsPage() {
         <div>
           <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white flex items-center gap-2.5">
             <Mail className="h-7 w-7 text-primary" />
-            Squad Invitations
+            Team Invitations
           </h1>
           <p className="text-sm text-slate-300 mt-1">
             Review invites from team leaders seeking your technical skills for their hackathon submission.
@@ -129,11 +129,11 @@ export default function TeamInvitationsPage() {
           <Mail className="h-10 w-10 text-slate-500 mx-auto mb-2 opacity-50" />
           <h3 className="text-base font-bold text-white">No pending invitations</h3>
           <p className="text-xs text-slate-400 mt-1 max-w-sm mx-auto">
-            You don't have any incoming squad requests. Head over to the talent terminal to find teams or create your own squad.
+            You don't have any incoming team requests. Head over to the talent terminal to find teams or create your own team.
           </p>
           <div className="mt-5 flex items-center justify-center gap-3">
             <Button asChild size="sm" variant="outline" className="text-xs font-semibold border-white/10 text-slate-200 hover:text-white">
-              <Link to="/team">Create Squad</Link>
+              <Link to="/team">Create Team</Link>
             </Button>
             <Button asChild size="sm" className="text-xs font-bold bg-primary hover:bg-primary-hover text-white border border-primary/30 glow-brand">
               <Link to="/discover">Discover Hackers</Link>
@@ -153,7 +153,7 @@ export default function TeamInvitationsPage() {
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded-full bg-primary/15 text-primary-light border border-primary/30">
-                    Squad Invitation
+                    Team Invitation
                   </span>
                   {inv.event_name && (
                     <span className="text-xs font-mono text-slate-400">
@@ -163,7 +163,7 @@ export default function TeamInvitationsPage() {
                 </div>
 
                 <h3 className="text-base font-bold text-white">
-                  {inv.team_name || `Squad #${inv.team_id}`}
+                  {inv.team_name || `Team #${inv.team_id}`}
                 </h3>
 
                 <div className="flex items-center gap-4 text-xs font-mono text-slate-400">
@@ -202,7 +202,7 @@ export default function TeamInvitationsPage() {
                   ) : (
                     <Check className="h-3.5 w-3.5 mr-1.5" />
                   )}
-                  Accept &amp; Join Squad
+                  Accept &amp; Join Team
                 </Button>
               </div>
             </Card>

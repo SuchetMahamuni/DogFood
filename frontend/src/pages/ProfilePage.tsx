@@ -229,7 +229,7 @@ export default function ProfilePage() {
         <div>
           <p className="text-xs text-slate-300 font-mono leading-relaxed p-4 rounded-xl bg-[#0F1522] border border-slate-800/80">
             {profile.previous_projects ||
-              'OpenAgent CLI (Rust developer agent with 1.2k GitHub stars), DogFood Engine, Distributed Vector Cache.'}
+              'OpenAgent CLI (Rust developer agent with 1.2k GitHub stars), DogFood System, Distributed Vector Cache.'}
           </p>
         </div>
       </div>

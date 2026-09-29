@@ -68,3 +68,9 @@ def leave_team(team_id):
     if error:
         return jsonify({'success': False, 'error': {'code': 'BAD_REQUEST', 'message': error}}), 400
     return jsonify({'success': True, 'data': {'message': 'Left team successfully.'}}), 200
+
+@teams_bp.route('/teams/invitations', methods=['GET'])
+@require_auth
+def get_my_invitations():
+    invitations = TeamService.get_my_invitations(request.user.id)
+    return jsonify({'success': True, 'data': invite_schema.dump(invitations, many=True)}), 200

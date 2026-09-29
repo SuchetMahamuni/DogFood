@@ -114,7 +114,7 @@ export default function ProjectPage() {
         const created = await projectService.createProject(targetTeamId, formData)
         setProject(created)
         setIsEditing(false)
-        setFeedback({ type: 'success', message: 'Project created and attached to your squad workspace!' })
+        setFeedback({ type: 'success', message: 'Project created and attached to your team workspace!' })
       }
     } catch (err) {
       setFeedback({ type: 'error', message: getApiErrorMessage(err, 'Failed to save project.') })

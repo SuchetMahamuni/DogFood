@@ -20,7 +20,7 @@ interface NavbarProps {
 }
 
 /**
- * Top navigation bar — sticky, glass-morphic console with theme & appearance controls.
+ * Top navigation bar — sticky, glass-morphic dashboard with theme & appearance controls.
  * Strictly 64px (h-16) to align with layout offsets.
  */
 export function Navbar({

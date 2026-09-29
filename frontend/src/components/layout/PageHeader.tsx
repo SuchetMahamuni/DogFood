@@ -9,7 +9,7 @@ interface PageHeaderProps {
   /** Optional back link for contextual hierarchy (e.g. '← All Events') */
   backTo?: string
   backLabel?: string
-  /** Badge / Telemetry info beside title */
+  /** Badge / Metrics info beside title */
   badge?: React.ReactNode
   /** Rendered right of the title row (e.g. action buttons) */
   actions?: React.ReactNode

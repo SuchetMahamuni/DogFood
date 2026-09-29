@@ -90,7 +90,7 @@ export function UserMenu({ user, onLogout }: UserMenuProps) {
           <DropdownMenuItem asChild className="focus:bg-surface-elevated focus:text-foreground cursor-pointer">
             <Link to="/organizer" className="flex items-center gap-2.5 w-full text-xs text-foreground/80 hover:text-foreground">
               <Shield className="h-4 w-4 text-muted-foreground" />
-              Organizer Console
+              Organizer Dashboard
             </Link>
           </DropdownMenuItem>
         )}

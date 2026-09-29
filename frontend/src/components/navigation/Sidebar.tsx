@@ -8,7 +8,7 @@ interface SidebarProps {
 }
 
 /**
- * Desktop sidebar — console left rail showing role-based navigation.
+ * Desktop sidebar — dashboard left rail showing role-based navigation.
  * Active indicator uses CSS variable --color-primary for per-theme accent.
  */
 export function Sidebar({ role }: SidebarProps) {

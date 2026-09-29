@@ -373,6 +373,7 @@ interface CuratedVideo {
   title: string
   category: string
   url: string
+  youtubeId: string
   duration: string
   description: string
   tag: string
@@ -381,12 +382,12 @@ interface CuratedVideo {
 const CURATED_VIDEOS: CuratedVideo[] = [
   {
     id: 'pitching',
-    title: 'How to Pitch: Hackathon Demo & Storytelling',
+    title: 'How I Won 21x Hackthon || Hackathon Presentation Tips to Pitch & Win',
     category: 'Presentation / Pitching',
     url: 'https://youtu.be/ConzkRP2mpk',
+    youtubeId: 'ConzkRP2mpk',
     duration: '11:15',
-    description:
-      'Master the 2-minute hackathon pitch: frame the problem statement, structure your demo narrative, and convince judges with clarity.',
+    description: 'Master the 2-minute hackathon pitch: frame the problem statement, structure your demo narrative, and convince judges with clarity.',
     tag: 'Recommended for All Teams',
   },
   {
@@ -394,9 +395,9 @@ const CURATED_VIDEOS: CuratedVideo[] = [
     title: 'Hackathon Engineering Masterclass',
     category: 'Engineering & Strategy',
     url: 'https://youtu.be/DizrlqWIEWs',
+    youtubeId: 'DizrlqWIEWs',
     duration: '14:20',
-    description:
-      'Key frameworks for rapid full-stack execution, cutting unnecessary scope, and shipping high-impact prototypes on a deadline.',
+    description: 'Key frameworks for rapid full-stack execution, cutting unnecessary scope, and shipping high-impact prototypes on a deadline.',
     tag: 'Core Strategy',
   },
   {
@@ -404,9 +405,9 @@ const CURATED_VIDEOS: CuratedVideo[] = [
     title: 'Building & Validating Prototypes Fast',
     category: 'Engineering & Strategy',
     url: 'https://youtu.be/vz4Xf1QlYm8',
+    youtubeId: 'vz4Xf1QlYm8',
     duration: '18:45',
-    description:
-      'Architectural principles for rapid validation, component reusability, and focusing engineering effort on the primary differentiator.',
+    description: 'Architectural principles for rapid validation, component reusability, and focusing engineering effort on the primary differentiator.',
     tag: 'Build Phase',
   },
 ]
@@ -841,10 +842,38 @@ export default function GuidancePage() {
                 <div className="space-y-3.5">
                   {/* Video Thumbnail Placeholder / Card preview */}
                   <div className="relative aspect-video rounded-xl bg-gradient-to-br from-[#0F1522] to-[#070A12] border border-slate-800 flex items-center justify-center overflow-hidden">
-                    <div className="h-12 w-12 rounded-full bg-primary text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                      <Play className="h-5 w-5 ml-0.5 fill-white" />
+                    <img 
+                      src={`https://img.youtube.com/vi/${vid.youtubeId}/maxresdefault.jpg`}
+                      alt={vid.title}
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      onError={(e) => {
+                        const target = e.currentTarget;
+                        target.style.display = 'none';
+                        if (target.nextElementSibling) {
+                          (target.nextElementSibling as HTMLElement).style.display = 'flex';
+                        }
+                      }}
+                    />
+                    {/* Fallback container (hidden by default unless image fails) */}
+                    <div className="absolute inset-0 flex-col items-center justify-center p-4 text-center hidden bg-gradient-to-br from-[#0F1522] to-[#070A12]">
+                      <div className="h-10 w-10 mb-2 rounded-full bg-primary/20 text-primary flex items-center justify-center">
+                        <Play className="h-5 w-5 ml-0.5 fill-current" />
+                      </div>
+                      <span className="text-[10px] font-mono font-bold text-primary-light uppercase mb-1">
+                        {vid.category}
+                      </span>
+                      <span className="text-xs font-bold text-white line-clamp-2">
+                        {vid.title}
+                      </span>
                     </div>
-                    <span className="absolute bottom-2 right-2 px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-black/80 text-slate-300 border border-white/10">
+
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+                      <div className="h-12 w-12 rounded-full bg-primary/90 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                        <Play className="h-5 w-5 ml-0.5 fill-white" />
+                      </div>
+                    </div>
+                    
+                    <span className="absolute bottom-2 right-2 px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-black/80 text-slate-300 border border-white/10 z-10">
                       {vid.duration}
                     </span>
                   </div>

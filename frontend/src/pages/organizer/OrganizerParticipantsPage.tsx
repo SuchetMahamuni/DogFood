@@ -93,7 +93,7 @@ export default function OrganizerParticipantsPage() {
           </div>
         )}
 
-        {/* Telemetry Control Bar */}
+        {/* Metrics Control Bar */}
         <div className="bg-[#0B1020] p-4 rounded-xl border border-slate-800/80 shadow-md flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="relative flex-1 max-w-md">
             <Search className="absolute left-3 top-2.5 h-4 w-4 text-slate-500" />
@@ -212,7 +212,7 @@ export default function OrganizerParticipantsPage() {
                     )}
                   </div>
 
-                  {/* Footer telemetry */}
+                  {/* Footer metrics */}
                   <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-500">
                     <div className="flex items-center gap-1.5 truncate">
                       <Calendar className="h-3 w-3 text-slate-500 shrink-0" />

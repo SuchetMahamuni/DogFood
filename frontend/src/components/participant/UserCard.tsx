@@ -18,7 +18,10 @@ export function UserCard({ user, onViewProfile, onInvite, hasPendingInvite }: Us
   const skillsList = user.skills ? user.skills.split(',').map((s) => s.trim()).filter(Boolean) : []
 
   return (
-    <Card className="card-lift flex flex-col h-full bg-card/90 border-white/10 hover:border-primary/40 hover:shadow-[0_0_24px_rgba(99,102,241,0.2)] transition-all duration-200">
+    <Card 
+      className="card-lift flex flex-col h-full bg-card/90 border-white/10 hover:border-primary/40 hover:shadow-[0_0_24px_rgba(99,102,241,0.2)] transition-all duration-200 cursor-pointer"
+      onClick={() => onViewProfile(user)}
+    >
       <CardHeader className="pb-3 pt-4">
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-3">
@@ -93,7 +96,10 @@ export function UserCard({ user, onViewProfile, onInvite, hasPendingInvite }: Us
           variant="outline"
           size="sm"
           className="flex-1 text-xs h-8 border-white/10 text-slate-300 hover:text-white hover:bg-surface-elevated"
-          onClick={() => onViewProfile(user)}
+          onClick={(e) => {
+            e.stopPropagation()
+            onViewProfile(user)
+          }}
         >
           <Eye className="h-3.5 w-3.5 mr-1" />
           Profile
@@ -103,7 +109,10 @@ export function UserCard({ user, onViewProfile, onInvite, hasPendingInvite }: Us
           size="sm"
           className="flex-1 text-xs h-8 font-semibold bg-primary hover:bg-primary-hover text-white shadow-xs"
           disabled={hasPendingInvite}
-          onClick={() => onInvite(user)}
+          onClick={(e) => {
+            e.stopPropagation()
+            onInvite(user)
+          }}
         >
           <UserPlus className="h-3.5 w-3.5 mr-1" />
           {hasPendingInvite ? 'Invited' : 'Connect'}

@@ -14,7 +14,7 @@ interface AppLayoutProps {
 }
 
 /**
- * Authenticated application shell — dark developer workspace console.
+ * Authenticated application shell — dark developer workspace dashboard.
  *
  * Desktop: fixed Navbar (top 64px, h-16) + fixed Sidebar (left 256px, w-64) + scrollable main content.
  * Mobile:  fixed Navbar + slide-out drawer (MobileNav) + full-width main content.

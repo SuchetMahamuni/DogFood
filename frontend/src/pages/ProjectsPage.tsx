@@ -20,77 +20,6 @@ import eventService from '@/services/eventService'
 import projectService from '@/services/projectService'
 import type { Event, Project } from '@/types/participant'
 
-// Rich demo projects for showcase when DB is unseeded
-const DEMO_PROJECTS: Project[] = [
-  {
-    id: 1,
-    title: 'Agentic DevCockpit',
-    short_description: 'Autonomous pair-programming environment with multi-agent orchestration and local execution sandboxes.',
-    detailed_description: 'Built with React, Vite, Python, and Flask. Implements agent state streaming, file editing AST verification, and automated tests.',
-    repository_url: 'https://github.com/dogfood/devcockpit',
-    demo_url: 'https://devcockpit.demo.dev',
-    video_url: 'https://youtube.com/watch?v=demo1',
-    technologies: 'React, TypeScript, Python, Flask, Docker, WebSockets',
-    is_submitted: true,
-    submitted_at: new Date(Date.now() - 36 * 3600 * 1000).toISOString(),
-  },
-  {
-    id: 2,
-    title: 'CloudMesh Autonomous Gateway',
-    short_description: 'Decentralized API gateway and edge telemetry collector with millisecond failover routing.',
-    detailed_description: 'High-throughput edge mesh supporting gRPC, HTTP/3, and real-time anomaly discovery.',
-    repository_url: 'https://github.com/nexus/cloudmesh',
-    demo_url: 'https://cloudmesh.io',
-    video_url: 'https://youtube.com/watch?v=demo2',
-    technologies: 'Go, Rust, Docker, Kubernetes, Prometheus',
-    is_submitted: true,
-    submitted_at: new Date(Date.now() - 24 * 3600 * 1000).toISOString(),
-  },
-  {
-    id: 3,
-    title: 'SentryGuard Protocol',
-    short_description: 'Real-time smart contract static analysis tool with symbolic execution and automated zero-day detection.',
-    detailed_description: 'Finds reentrancy bugs, arithmetic overflows, and unvalidated access controls before mainnet deploy.',
-    repository_url: 'https://github.com/zeroday/sentryguard',
-    demo_url: 'https://sentryguard.xyz',
-    technologies: 'Solidity, Rust, Python, Next.js, TailwindCSS',
-    is_submitted: true,
-    submitted_at: new Date(Date.now() - 18 * 3600 * 1000).toISOString(),
-  },
-  {
-    id: 4,
-    title: 'HyperLedger Fraud Engine',
-    short_description: 'Sub-millisecond fraud pattern classifier with online inference on high-frequency transactions.',
-    detailed_description: 'Evaluates transaction graphs in memory using graph neural networks and heuristic checks.',
-    repository_url: 'https://github.com/fintech/fraud-engine',
-    demo_url: 'https://fraudengine.app',
-    technologies: 'Python, PyTorch, FastAPI, Redis, Kafka',
-    is_submitted: true,
-    submitted_at: new Date(Date.now() - 12 * 3600 * 1000).toISOString(),
-  },
-  {
-    id: 5,
-    title: 'VoxelVision SLAM',
-    short_description: 'Spatial 3D mapping and obstacle avoidance engine for autonomous delivery drones.',
-    detailed_description: 'Direct sparse odometry pipeline with low-latency GPU acceleration and point cloud mesh synthesis.',
-    repository_url: 'https://github.com/robokinetic/voxelvision',
-    demo_url: 'https://voxelvision.ai',
-    technologies: 'C++, CUDA, ROS2, OpenCV, Three.js',
-    is_submitted: true,
-    submitted_at: new Date(Date.now() - 8 * 3600 * 1000).toISOString(),
-  },
-  {
-    id: 6,
-    title: 'ZeroKnowledge Identity Vault',
-    short_description: 'Privacy-preserving credential attestation with zk-SNARKs and decentralized identifiers.',
-    detailed_description: 'Enables users to prove age, citizenship, or employment status without disclosing personal records.',
-    repository_url: 'https://github.com/zkid/vault',
-    technologies: 'Circom, SnarkJS, TypeScript, React',
-    is_submitted: true,
-    submitted_at: new Date(Date.now() - 4 * 3600 * 1000).toISOString(),
-  },
-]
-
 export default function ProjectsPage() {
   const [events, setEvents] = useState<Event[]>([])
   const [selectedEventId, setSelectedEventId] = useState<number>(1)
@@ -109,7 +38,7 @@ export default function ProjectsPage() {
         setSelectedEventId(initialEventId)
         await loadProjectsForEvent(initialEventId)
       } catch {
-        setProjects(DEMO_PROJECTS)
+        setProjects([])
       } finally {
         setIsLoading(false)
       }
@@ -123,10 +52,10 @@ export default function ProjectsPage() {
       if (data && data.length > 0) {
         setProjects(data)
       } else {
-        setProjects(DEMO_PROJECTS)
+        setProjects([])
       }
     } catch {
-      setProjects(DEMO_PROJECTS)
+      setProjects([])
     }
   }
 

@@ -158,13 +158,13 @@ export default function EventDetailsPage() {
           <Card className="border-white/15 bg-card/95 shadow-xl">
             <CardHeader className="pb-3 border-b border-white/10">
               <CardTitle className="text-sm font-bold text-white">Participant Operations</CardTitle>
-              <CardDescription className="text-xs text-slate-400">Collaborate with your squad or build solo</CardDescription>
+              <CardDescription className="text-xs text-slate-400">Collaborate with your team or build solo</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3 pt-4">
               <div className="p-3 rounded-xl bg-primary/10 border border-primary/20 space-y-1">
                 <p className="text-xs font-mono font-bold text-primary-light flex items-center gap-1.5">
                   <ShieldCheck className="h-4 w-4 text-primary" />
-                  Squad Requirement
+                  Team Requirement
                 </p>
                 <p className="text-[11px] text-slate-300 leading-relaxed">
                   Teams must be registered before submitting projects to judges.

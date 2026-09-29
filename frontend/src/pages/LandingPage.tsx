@@ -19,7 +19,7 @@ const workflowSteps = [
     step: '01',
     title: 'DISCOVER',
     subtitle: 'Find Teammates',
-    description: 'Filter developers and engineers by skills, preferred roles, and availability. Direct squad invitations with instant status sync.',
+    description: 'Filter developers and engineers by skills, preferred roles, and availability. Direct team invitations with instant status sync.',
     icon: Compass,
     accent: 'text-cyan-500',
     border: 'border-cyan-500/30',
@@ -46,7 +46,7 @@ const workflowSteps = [
     step: '04',
     title: 'JUDGE',
     subtitle: 'Conflict-Free Scoring',
-    description: 'Multi-criteria weighted rubrics with automated conflict-of-interest detection prevent evaluators from scoring affiliated squads.',
+    description: 'Multi-criteria weighted rubrics with automated conflict-of-interest detection prevent evaluators from scoring affiliated teams.',
     icon: Scale,
     accent: 'text-amber-500',
     border: 'border-amber-500/30',
@@ -148,7 +148,7 @@ export default function LandingPage() {
                   <div className="h-3 w-3 rounded-full bg-amber-500/80" />
                   <div className="h-3 w-3 rounded-full bg-emerald-500/80" />
                   <span className="ml-2 font-mono text-xs text-muted-foreground">
-                    dogfood.internal/events/1/console
+                    dogfood.internal/events/1/dashboard
                   </span>
                 </div>
                 <div className="flex items-center gap-2">
@@ -336,7 +336,7 @@ export default function LandingPage() {
                   </div>
                 </div>
                 <p className="text-xs text-muted-foreground leading-relaxed">
-                  Dedicated evaluation console with multi-criteria rubric sliders, weighted scoring formulas, and conflict-of-interest safeguards.
+                  Dedicated evaluation dashboard with multi-criteria rubric sliders, weighted scoring formulas, and conflict-of-interest safeguards.
                 </p>
               </div>
               <ul className="space-y-2 text-xs text-muted-foreground pt-3 border-t border-border font-mono">

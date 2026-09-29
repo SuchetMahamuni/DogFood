@@ -104,7 +104,7 @@ export default function OrganizerTeamsPage() {
           </div>
         )}
 
-        {/* Telemetry Filter Strip */}
+        {/* Metrics Filter Strip */}
         <div className="bg-[#0B1020] p-4 rounded-xl border border-slate-800/80 shadow-md flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div className="flex flex-wrap items-center gap-3">
             {events.length > 0 && (
@@ -267,7 +267,7 @@ export default function OrganizerTeamsPage() {
                     className="h-8 text-xs w-full bg-[#070A12] border-slate-800 text-slate-300 hover:text-white hover:border-primary/50 hover:bg-indigo-950/20"
                   >
                     <Link to={`/project/${proj.id}`}>
-                      Inspect Submission Dossier
+                      Inspect Submission Details
                       <ExternalLink className="h-3 w-3 ml-1.5" />
                     </Link>
                   </Button>
