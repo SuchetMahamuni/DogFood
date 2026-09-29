@@ -1,0 +1,1129 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/*  TYPOGRAPHY & RADIUS TOKENS (theme-invariant)                               */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+@theme {
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', Menlo, monospace;
+
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.375rem;
+  --radius: 0.5rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+  --radius-3xl: 1.5rem;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/*  THEME 1 — EMERALD FORGE  (port 5173, default)                              */
+/*  Personality: Premium developer platform. Modern. Professional. Technical.  */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+:root,
+[data-theme="emerald"] {
+  /* Base */
+  --color-background:       #070A08;
+  --color-surface-base:     #070A08;
+  --color-surface-subtle:   #0D1210;
+  --color-surface-card:     #0D1210;
+  --color-surface-elevated: #151C18;
+  --color-surface-overlay:  #19221D;
+  --color-surface-highlight:#1E2923;
+
+  /* Component aliases */
+  --color-card:             #0D1210;
+  --color-card-foreground:  #F5F7F6;
+  --color-popover:          #0D1210;
+  --color-popover-foreground: #F5F7F6;
+  --color-muted:            #151C18;
+  --color-muted-foreground: #91A099;
+  --color-secondary:        #19221D;
+  --color-secondary-foreground: #F5F7F6;
+  --color-input:            #151C18;
+  --color-ring:             #10B981;
+
+  /* Borders */
+  --color-border:           #26332D;
+  --color-border-subtle:    rgba(255,255,255,0.06);
+  --color-border-strong:    rgba(255,255,255,0.12);
+  --color-border-glow:      rgba(16,185,129,0.4);
+
+  /* Brand — Emerald */
+  --color-primary:          #10B981;
+  --color-primary-foreground: #ffffff;
+  --color-primary-hover:    #34D399;
+  --color-primary-active:   #059669;
+  --color-primary-subtle:   rgba(16,185,129,0.15);
+  --color-primary-light:    #6EE7B7;
+
+  /* Accent */
+  --color-accent:           rgba(16,185,129,0.12);
+  --color-accent-foreground:#6EE7B7;
+  --color-accent-strong:    #059669;
+
+  /* Text */
+  --color-foreground:       #F5F7F6;
+  --color-text-secondary:   #C5D0CB;
+  --color-text-muted:       #91A099;
+
+  /* Semantic status (invariant across themes) */
+  --color-success:          #34D399;
+  --color-success-foreground: #ffffff;
+  --color-success-muted:    rgba(52,211,153,0.15);
+  --color-warning:          #F59E0B;
+  --color-warning-foreground: #ffffff;
+  --color-warning-muted:    rgba(245,158,11,0.15);
+  --color-destructive:      #F43F5E;
+  --color-destructive-foreground: #ffffff;
+  --color-destructive-muted:rgba(244,63,94,0.15);
+
+  /* Glow */
+  --glow-primary:           rgba(16,185,129,0.35);
+  --glow-primary-strong:    rgba(16,185,129,0.5);
+
+  /* Gradients */
+  --hero-glow-color:        rgba(16,185,129,0.20);
+  --brand-gradient-from:    #10B981;
+  --brand-gradient-to:      #6EE7B7;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/*  THEME 2 — COPPER FLAME  (port 5174)                                        */
+/*  Personality: Bold. Warm. High-energy. Modern startup/product feel.         */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+[data-theme="copper"] {
+  --color-background:       #0B0907;
+  --color-surface-base:     #0B0907;
+  --color-surface-subtle:   #12100D;
+  --color-surface-card:     #12100D;
+  --color-surface-elevated: #1A1612;
+  --color-surface-overlay:  #211B15;
+  --color-surface-highlight:#28201A;
+
+  --color-card:             #12100D;
+  --color-card-foreground:  #FAF8F5;
+  --color-popover:          #12100D;
+  --color-popover-foreground: #FAF8F5;
+  --color-muted:            #1A1612;
+  --color-muted-foreground: #9D9186;
+  --color-secondary:        #211B15;
+  --color-secondary-foreground: #FAF8F5;
+  --color-input:            #1A1612;
+  --color-ring:             #F97316;
+
+  --color-border:           #352A20;
+  --color-border-subtle:    rgba(255,255,255,0.06);
+  --color-border-strong:    rgba(255,255,255,0.12);
+  --color-border-glow:      rgba(249,115,22,0.4);
+
+  --color-primary:          #F97316;
+  --color-primary-foreground: #ffffff;
+  --color-primary-hover:    #FB923C;
+  --color-primary-active:   #EA6A0A;
+  --color-primary-subtle:   rgba(249,115,22,0.15);
+  --color-primary-light:    #FDBA74;
+
+  --color-accent:           rgba(249,115,22,0.12);
+  --color-accent-foreground:#FDBA74;
+  --color-accent-strong:    #EA6A0A;
+
+  --color-foreground:       #FAF8F5;
+  --color-text-secondary:   #CEC3B9;
+  --color-text-muted:       #9D9186;
+
+  --color-success:          #34D399;
+  --color-success-foreground: #ffffff;
+  --color-success-muted:    rgba(52,211,153,0.15);
+  --color-warning:          #F59E0B;
+  --color-warning-foreground: #ffffff;
+  --color-warning-muted:    rgba(245,158,11,0.15);
+  --color-destructive:      #F43F5E;
+  --color-destructive-foreground: #ffffff;
+  --color-destructive-muted:rgba(244,63,94,0.15);
+
+  --glow-primary:           rgba(249,115,22,0.35);
+  --glow-primary-strong:    rgba(249,115,22,0.5);
+  --hero-glow-color:        rgba(249,115,22,0.18);
+  --brand-gradient-from:    #F97316;
+  --brand-gradient-to:      #FDBA74;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/*  THEME 3 — CRIMSON CORE  (port 5175)                                        */
+/*  Personality: Competitive. Powerful. Confident. High-stakes hackathon.      */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+[data-theme="crimson"] {
+  --color-background:       #0B0809;
+  --color-surface-base:     #0B0809;
+  --color-surface-subtle:   #130D10;
+  --color-surface-card:     #130D10;
+  --color-surface-elevated: #1B1216;
+  --color-surface-overlay:  #22171C;
+  --color-surface-highlight:#281C21;
+
+  --color-card:             #130D10;
+  --color-card-foreground:  #FAF8F9;
+  --color-popover:          #130D10;
+  --color-popover-foreground: #FAF8F9;
+  --color-muted:            #1B1216;
+  --color-muted-foreground: #9B8B92;
+  --color-secondary:        #22171C;
+  --color-secondary-foreground: #FAF8F9;
+  --color-input:            #1B1216;
+  --color-ring:             #E11D48;
+
+  --color-border:           #38242B;
+  --color-border-subtle:    rgba(255,255,255,0.06);
+  --color-border-strong:    rgba(255,255,255,0.12);
+  --color-border-glow:      rgba(225,29,72,0.4);
+
+  --color-primary:          #E11D48;
+  --color-primary-foreground: #ffffff;
+  --color-primary-hover:    #F43F5E;
+  --color-primary-active:   #C81840;
+  --color-primary-subtle:   rgba(225,29,72,0.15);
+  --color-primary-light:    #FB7185;
+
+  --color-accent:           rgba(225,29,72,0.12);
+  --color-accent-foreground:#FB7185;
+  --color-accent-strong:    #C81840;
+
+  --color-foreground:       #FAF8F9;
+  --color-text-secondary:   #D0C2C7;
+  --color-text-muted:       #9B8B92;
+
+  --color-success:          #34D399;
+  --color-success-foreground: #ffffff;
+  --color-success-muted:    rgba(52,211,153,0.15);
+  --color-warning:          #F59E0B;
+  --color-warning-foreground: #ffffff;
+  --color-warning-muted:    rgba(245,158,11,0.15);
+  --color-destructive:      #FB7185;
+  --color-destructive-foreground: #ffffff;
+  --color-destructive-muted:rgba(251,113,133,0.15);
+
+  --glow-primary:           rgba(225,29,72,0.35);
+  --glow-primary-strong:    rgba(225,29,72,0.5);
+  --hero-glow-color:        rgba(225,29,72,0.18);
+  --brand-gradient-from:    #E11D48;
+  --brand-gradient-to:      #FB7185;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/*  THEME 4 — GOLD OLIVE  (port 5176)                                          */
+/*  Personality: Sophisticated. Premium. Editorial. Elegant.                   */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+[data-theme="gold"] {
+  --color-background:       #0A0B07;
+  --color-surface-base:     #0A0B07;
+  --color-surface-subtle:   #12130D;
+  --color-surface-card:     #12130D;
+  --color-surface-elevated: #1A1B13;
+  --color-surface-overlay:  #222318;
+  --color-surface-highlight:#29291E;
+
+  --color-card:             #12130D;
+  --color-card-foreground:  #FAFAF2;
+  --color-popover:          #12130D;
+  --color-popover-foreground: #FAFAF2;
+  --color-muted:            #1A1B13;
+  --color-muted-foreground: #989886;
+  --color-secondary:        #222318;
+  --color-secondary-foreground: #FAFAF2;
+  --color-input:            #1A1B13;
+  --color-ring:             #EAB308;
+
+  --color-border:           #343522;
+  --color-border-subtle:    rgba(255,255,255,0.06);
+  --color-border-strong:    rgba(255,255,255,0.12);
+  --color-border-glow:      rgba(234,179,8,0.35);
+
+  --color-primary:          #EAB308;
+  --color-primary-foreground: #0A0B07;
+  --color-primary-hover:    #FACC15;
+  --color-primary-active:   #CA9906;
+  --color-primary-subtle:   rgba(234,179,8,0.15);
+  --color-primary-light:    #D4B46A;
+
+  --color-accent:           rgba(234,179,8,0.12);
+  --color-accent-foreground:#D4B46A;
+  --color-accent-strong:    #A3A33C;
+
+  --color-foreground:       #FAFAF2;
+  --color-text-secondary:   #CDCDBE;
+  --color-text-muted:       #989886;
+
+  --color-success:          #34D399;
+  --color-success-foreground: #ffffff;
+  --color-success-muted:    rgba(52,211,153,0.15);
+  --color-warning:          #F59E0B;
+  --color-warning-foreground: #ffffff;
+  --color-warning-muted:    rgba(245,158,11,0.15);
+  --color-destructive:      #F43F5E;
+  --color-destructive-foreground: #ffffff;
+  --color-destructive-muted:rgba(244,63,94,0.15);
+
+  --glow-primary:           rgba(234,179,8,0.30);
+  --glow-primary-strong:    rgba(234,179,8,0.45);
+  --hero-glow-color:        rgba(234,179,8,0.15);
+  --brand-gradient-from:    #EAB308;
+  --brand-gradient-to:      #D4B46A;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/*  THEME 5 — TERRACOTTA SAGE  (port 5177)                                     */
+/*  Personality: Creative. Warm. Modern. Design-oriented. Premium.             */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+[data-theme="terracotta"] {
+  --color-background:       #0C0B0A;
+  --color-surface-base:     #0C0B0A;
+  --color-surface-subtle:   #151412;
+  --color-surface-card:     #151412;
+  --color-surface-elevated: #1D1B18;
+  --color-surface-overlay:  #24211D;
+  --color-surface-highlight:#2C2823;
+
+  --color-card:             #151412;
+  --color-card-foreground:  #F7F5F1;
+  --color-popover:          #151412;
+  --color-popover-foreground: #F7F5F1;
+  --color-muted:            #1D1B18;
+  --color-muted-foreground: #948D83;
+  --color-secondary:        #24211D;
+  --color-secondary-foreground: #F7F5F1;
+  --color-input:            #1D1B18;
+  --color-ring:             #C2410C;
+
+  --color-border:           #34312B;
+  --color-border-subtle:    rgba(255,255,255,0.06);
+  --color-border-strong:    rgba(255,255,255,0.12);
+  --color-border-glow:      rgba(194,65,12,0.4);
+
+  --color-primary:          #C2410C;
+  --color-primary-foreground: #ffffff;
+  --color-primary-hover:    #EA580C;
+  --color-primary-active:   #9A340A;
+  --color-primary-subtle:   rgba(194,65,12,0.15);
+  --color-primary-light:    #FDBA74;
+
+  --color-accent:           rgba(132,169,140,0.15);
+  --color-accent-foreground:#84A98C;
+  --color-accent-strong:    #5C8967;
+
+  --color-foreground:       #F7F5F1;
+  --color-text-secondary:   #C9C3BA;
+  --color-text-muted:       #948D83;
+
+  --color-success:          #4ADE80;
+  --color-success-foreground: #ffffff;
+  --color-success-muted:    rgba(74,222,128,0.15);
+  --color-warning:          #EAB308;
+  --color-warning-foreground: #ffffff;
+  --color-warning-muted:    rgba(234,179,8,0.15);
+  --color-destructive:      #F87171;
+  --color-destructive-foreground: #ffffff;
+  --color-destructive-muted:rgba(248,113,113,0.15);
+
+  --glow-primary:           rgba(194,65,12,0.35);
+  --glow-primary-strong:    rgba(194,65,12,0.5);
+  --hero-glow-color:        rgba(194,65,12,0.18);
+  --brand-gradient-from:    #C2410C;
+  --brand-gradient-to:      #84A98C;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/*  LIGHT MODE — THEME 1: EMERALD FORGE LIGHT (port 5173, default)             */
+/*  Personality: Calming, editorial developer workspace. Soft off-white sage   */
+/*  and ivory-cream surfaces with vibrant emerald accents.                     */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+[data-mode="light"],
+[data-theme="emerald"][data-mode="light"],
+[data-mode="light"][data-theme="emerald"] {
+  /* Base — Warm Sage Off-White & Cream */
+  --color-background:       #F3F6F4;
+  --color-surface-base:     #F3F6F4;
+  --color-surface-subtle:   #E8EFEA;
+  --color-surface-card:     #FAFBF9;
+  --color-surface-elevated: #FAFBF9;
+  --color-surface-overlay:  #FDFEFC;
+  --color-surface-highlight:#DFEAE2;
+
+  /* Component aliases */
+  --color-card:             #FAFBF9;
+  --color-card-foreground:  #18221D;
+  --color-popover:          #FAFBF9;
+  --color-popover-foreground: #18221D;
+  --color-muted:            #E8EFEA;
+  --color-muted-foreground: #60726A;
+  --color-secondary:        #E8EFEA;
+  --color-secondary-foreground: #18221D;
+  --color-input:            #FAFBF9;
+  --color-ring:             #059669;
+
+  /* Borders — Soft natural tones */
+  --color-border:           #DCE5DF;
+  --color-border-subtle:    rgba(24,34,29,0.08);
+  --color-border-strong:    rgba(24,34,29,0.15);
+  --color-border-glow:      rgba(5,150,105,0.35);
+
+  /* Brand — Emerald */
+  --color-primary:          #059669;
+  --color-primary-foreground: #FFFFFF;
+  --color-primary-hover:    #047857;
+  --color-primary-active:   #065F46;
+  --color-primary-subtle:   rgba(5,150,105,0.12);
+  --color-primary-light:    #10B981;
+
+  /* Accent */
+  --color-accent:           rgba(5,150,105,0.09);
+  --color-accent-foreground:#047857;
+  --color-accent-strong:    #065F46;
+
+  /* Text — Deep charcoal with gentle warmth */
+  --color-foreground:       #18221D;
+  --color-text-secondary:   #42534B;
+  --color-text-muted:       #60726A;
+
+  /* Semantic status */
+  --color-success:          #059669;
+  --color-success-foreground: #FFFFFF;
+  --color-success-muted:    rgba(5,150,105,0.12);
+  --color-warning:          #D97706;
+  --color-warning-foreground: #FFFFFF;
+  --color-warning-muted:    rgba(217,119,6,0.12);
+  --color-destructive:      #E11D48;
+  --color-destructive-foreground: #FFFFFF;
+  --color-destructive-muted:rgba(225,29,72,0.12);
+
+  /* Glow & Gradients */
+  --glow-primary:           rgba(5,150,105,0.22);
+  --glow-primary-strong:    rgba(5,150,105,0.38);
+  --hero-glow-color:        rgba(5,150,105,0.14);
+  --brand-gradient-from:    #059669;
+  --brand-gradient-to:      #10B981;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/*  LIGHT MODE — THEME 2: COPPER FLAME LIGHT (port 5174)                       */
+/*  Personality: Warm, parchment & vanilla-cream feel with vivid copper        */
+/*  and flame orange accents.                                                  */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+[data-theme="copper"][data-mode="light"],
+[data-mode="light"][data-theme="copper"] {
+  /* Base — Warm Cream & Linen */
+  --color-background:       #F8F3EC;
+  --color-surface-base:     #F8F3EC;
+  --color-surface-subtle:   #EFE6DA;
+  --color-surface-card:     #FAF6EF;
+  --color-surface-elevated: #FAF6EF;
+  --color-surface-overlay:  #FCFAF6;
+  --color-surface-highlight:#E8DCCF;
+
+  --color-card:             #FAF6EF;
+  --color-card-foreground:  #251B13;
+  --color-popover:          #FAF6EF;
+  --color-popover-foreground: #251B13;
+  --color-muted:            #EFE6DA;
+  --color-muted-foreground: #7C6D60;
+  --color-secondary:        #EFE6DA;
+  --color-secondary-foreground: #251B13;
+  --color-input:            #FAF6EF;
+  --color-ring:             #EA580C;
+
+  --color-border:           #E2D7C8;
+  --color-border-subtle:    rgba(37,27,19,0.08);
+  --color-border-strong:    rgba(37,27,19,0.15);
+  --color-border-glow:      rgba(234,88,12,0.35);
+
+  --color-primary:          #EA580C;
+  --color-primary-foreground: #FFFFFF;
+  --color-primary-hover:    #C2410C;
+  --color-primary-active:   #9A3412;
+  --color-primary-subtle:   rgba(234,88,12,0.12);
+  --color-primary-light:    #F97316;
+
+  --color-accent:           rgba(234,88,12,0.09);
+  --color-accent-foreground:#C2410C;
+  --color-accent-strong:    #9A3412;
+
+  --color-foreground:       #251B13;
+  --color-text-secondary:   #56493D;
+  --color-text-muted:       #7C6D60;
+
+  --color-success:          #059669;
+  --color-success-foreground: #FFFFFF;
+  --color-success-muted:    rgba(5,150,105,0.12);
+  --color-warning:          #D97706;
+  --color-warning-foreground: #FFFFFF;
+  --color-warning-muted:    rgba(217,119,6,0.12);
+  --color-destructive:      #E11D48;
+  --color-destructive-foreground: #FFFFFF;
+  --color-destructive-muted:rgba(225,29,72,0.12);
+
+  --glow-primary:           rgba(234,88,12,0.22);
+  --glow-primary-strong:    rgba(234,88,12,0.38);
+  --hero-glow-color:        rgba(234,88,12,0.14);
+  --brand-gradient-from:    #EA580C;
+  --brand-gradient-to:      #F97316;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/*  LIGHT MODE — THEME 3: CRIMSON CORE LIGHT (port 5175)                       */
+/*  Personality: High-stakes, bold hackathon feel with soft rose-tinted cream  */
+/*  and punchy crimson accents.                                                */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+[data-theme="crimson"][data-mode="light"],
+[data-mode="light"][data-theme="crimson"] {
+  /* Base — Blush Cream & Warm Rose Porcelain */
+  --color-background:       #F8F3F4;
+  --color-surface-base:     #F8F3F4;
+  --color-surface-subtle:   #EFE5E7;
+  --color-surface-card:     #FAF6F7;
+  --color-surface-elevated: #FAF6F7;
+  --color-surface-overlay:  #FCF9FA;
+  --color-surface-highlight:#E8D9DC;
+
+  --color-card:             #FAF6F7;
+  --color-card-foreground:  #241619;
+  --color-popover:          #FAF6F7;
+  --color-popover-foreground: #241619;
+  --color-muted:            #EFE5E7;
+  --color-muted-foreground: #7B686C;
+  --color-secondary:        #EFE5E7;
+  --color-secondary-foreground: #241619;
+  --color-input:            #FAF6F7;
+  --color-ring:             #E11D48;
+
+  --color-border:           #E2D3D6;
+  --color-border-subtle:    rgba(36,22,25,0.08);
+  --color-border-strong:    rgba(36,22,25,0.15);
+  --color-border-glow:      rgba(225,29,72,0.35);
+
+  --color-primary:          #E11D48;
+  --color-primary-foreground: #FFFFFF;
+  --color-primary-hover:    #BE123C;
+  --color-primary-active:   #9F1239;
+  --color-primary-subtle:   rgba(225,29,72,0.12);
+  --color-primary-light:    #FB7185;
+
+  --color-accent:           rgba(225,29,72,0.09);
+  --color-accent-foreground:#BE123C;
+  --color-accent-strong:    #9F1239;
+
+  --color-foreground:       #241619;
+  --color-text-secondary:   #59474B;
+  --color-text-muted:       #7B686C;
+
+  --color-success:          #059669;
+  --color-success-foreground: #FFFFFF;
+  --color-success-muted:    rgba(5,150,105,0.12);
+  --color-warning:          #D97706;
+  --color-warning-foreground: #FFFFFF;
+  --color-warning-muted:    rgba(217,119,6,0.12);
+  --color-destructive:      #E11D48;
+  --color-destructive-foreground: #FFFFFF;
+  --color-destructive-muted:rgba(225,29,72,0.12);
+
+  --glow-primary:           rgba(225,29,72,0.22);
+  --glow-primary-strong:    rgba(225,29,72,0.38);
+  --hero-glow-color:        rgba(225,29,72,0.14);
+  --brand-gradient-from:    #E11D48;
+  --brand-gradient-to:      #FB7185;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/*  LIGHT MODE — THEME 4: GOLD OLIVE LIGHT (port 5176)                         */
+/*  Personality: Editorial, sophisticated vintage linen & warm ivory cream      */
+/*  with amber-gold and olive accents.                                         */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+[data-theme="gold"][data-mode="light"],
+[data-mode="light"][data-theme="gold"] {
+  /* Base — Vintage Linen Cream & Warm Ivory */
+  --color-background:       #F7F4EB;
+  --color-surface-base:     #F7F4EB;
+  --color-surface-subtle:   #EDE7D8;
+  --color-surface-card:     #FAF7F0;
+  --color-surface-elevated: #FAF7F0;
+  --color-surface-overlay:  #FCFAF5;
+  --color-surface-highlight:#E5DEC9;
+
+  --color-card:             #FAF7F0;
+  --color-card-foreground:  #222014;
+  --color-popover:          #FAF7F0;
+  --color-popover-foreground: #222014;
+  --color-muted:            #EDE7D8;
+  --color-muted-foreground: #77725F;
+  --color-secondary:        #EDE7D8;
+  --color-secondary-foreground: #222014;
+  --color-input:            #FAF7F0;
+  --color-ring:             #B45309;
+
+  --color-border:           #DFD8C4;
+  --color-border-subtle:    rgba(34,32,20,0.08);
+  --color-border-strong:    rgba(34,32,20,0.15);
+  --color-border-glow:      rgba(180,83,9,0.35);
+
+  --color-primary:          #B45309;
+  --color-primary-foreground: #FFFFFF;
+  --color-primary-hover:    #92400E;
+  --color-primary-active:   #78350F;
+  --color-primary-subtle:   rgba(180,83,9,0.12);
+  --color-primary-light:    #D97706;
+
+  --color-accent:           rgba(180,83,9,0.09);
+  --color-accent-foreground:#92400E;
+  --color-accent-strong:    #78350F;
+
+  --color-foreground:       #222014;
+  --color-text-secondary:   #534F3C;
+  --color-text-muted:       #77725F;
+
+  --color-success:          #059669;
+  --color-success-foreground: #FFFFFF;
+  --color-success-muted:    rgba(5,150,105,0.12);
+  --color-warning:          #D97706;
+  --color-warning-foreground: #FFFFFF;
+  --color-warning-muted:    rgba(217,119,6,0.12);
+  --color-destructive:      #E11D48;
+  --color-destructive-foreground: #FFFFFF;
+  --color-destructive-muted:rgba(225,29,72,0.12);
+
+  --glow-primary:           rgba(180,83,9,0.22);
+  --glow-primary-strong:    rgba(180,83,9,0.38);
+  --hero-glow-color:        rgba(180,83,9,0.14);
+  --brand-gradient-from:    #B45309;
+  --brand-gradient-to:      #D97706;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/*  LIGHT MODE — THEME 5: TERRACOTTA SAGE LIGHT (port 5177)                    */
+/*  Personality: Creative, warm earthen sand & terracotta cream surfaces      */
+/*  with earthen terracotta primary and soft sage green accents.               */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+[data-theme="terracotta"][data-mode="light"],
+[data-mode="light"][data-theme="terracotta"] {
+  /* Base — Warm Sand Cream & Earthen Ivory */
+  --color-background:       #F7F2EC;
+  --color-surface-base:     #F7F2EC;
+  --color-surface-subtle:   #ECE3D7;
+  --color-surface-card:     #FAF6F1;
+  --color-surface-elevated: #FAF6F1;
+  --color-surface-overlay:  #FCFAF6;
+  --color-surface-highlight:#E4D8C8;
+
+  --color-card:             #FAF6F1;
+  --color-card-foreground:  #241B16;
+  --color-popover:          #FAF6F1;
+  --color-popover-foreground: #241B16;
+  --color-muted:            #ECE3D7;
+  --color-muted-foreground: #796C61;
+  --color-secondary:        #ECE3D7;
+  --color-secondary-foreground: #241B16;
+  --color-input:            #FAF6F1;
+  --color-ring:             #C2410C;
+
+  --color-border:           #DDD3C3;
+  --color-border-subtle:    rgba(36,27,22,0.08);
+  --color-border-strong:    rgba(36,27,22,0.15);
+  --color-border-glow:      rgba(194,65,12,0.35);
+
+  --color-primary:          #C2410C;
+  --color-primary-foreground: #FFFFFF;
+  --color-primary-hover:    #9A3412;
+  --color-primary-active:   #7C2D12;
+  --color-primary-subtle:   rgba(194,65,12,0.12);
+  --color-primary-light:    #EA580C;
+
+  --color-accent:           rgba(61,104,74,0.12);
+  --color-accent-foreground:#3D684A;
+  --color-accent-strong:    #2D4F37;
+
+  --color-foreground:       #241B16;
+  --color-text-secondary:   #56483E;
+  --color-text-muted:       #796C61;
+
+  --color-success:          #059669;
+  --color-success-foreground: #FFFFFF;
+  --color-success-muted:    rgba(5,150,105,0.12);
+  --color-warning:          #D97706;
+  --color-warning-foreground: #FFFFFF;
+  --color-warning-muted:    rgba(217,119,6,0.12);
+  --color-destructive:      #E11D48;
+  --color-destructive-foreground: #FFFFFF;
+  --color-destructive-muted:rgba(225,29,72,0.12);
+
+  --glow-primary:           rgba(194,65,12,0.22);
+  --glow-primary-strong:    rgba(194,65,12,0.38);
+  --hero-glow-color:        rgba(194,65,12,0.14);
+  --brand-gradient-from:    #C2410C;
+  --brand-gradient-to:      #84A98C;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/*  LAYOUT CONSTANTS (theme-invariant)                                          */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+:root {
+  --navbar-height: 4rem;
+  --sidebar-width: 16rem;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/*  BASE STYLES                                                                 */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: smooth;
+    color-scheme: dark;
+    background-color: var(--color-background);
+  }
+
+  html[data-mode="light"] {
+    color-scheme: light;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    line-height: 1.6;
+    min-height: 100dvh;
+    margin: 0;
+    overflow-x: hidden;
+  }
+
+  #root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+    background-color: var(--color-background);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.025em;
+    color: var(--color-foreground);
+    margin: 0;
+  }
+
+  h1 { font-size: 2.25rem; letter-spacing: -0.03em; }
+  h2 { font-size: 1.75rem; }
+  h3 { font-size: 1.375rem; }
+  h4 { font-size: 1.125rem; }
+  h5 { font-size: 1rem; }
+  h6 { font-size: 0.875rem; }
+
+  p {
+    margin: 0;
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+  }
+
+  a {
+    color: var(--color-primary-light);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  a:hover {
+    color: var(--color-primary-hover);
+  }
+
+  code, pre {
+    font-family: var(--font-mono);
+  }
+
+  ::selection {
+    background: var(--color-primary-subtle);
+    color: #ffffff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--color-background); }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 99px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-surface-elevated);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/*  TAILWIND COLOR TOKEN BRIDGE                                                 */
+/*  Maps CSS var tokens → Tailwind utility classes                              */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+@theme inline {
+  --color-background:       var(--color-background);
+  --color-foreground:       var(--color-foreground);
+  --color-surface-base:     var(--color-surface-base);
+  --color-surface-subtle:   var(--color-surface-subtle);
+  --color-surface-card:     var(--color-surface-card);
+  --color-surface-elevated: var(--color-surface-elevated);
+  --color-surface-overlay:  var(--color-surface-overlay);
+  --color-card:             var(--color-card);
+  --color-card-foreground:  var(--color-card-foreground);
+  --color-popover:          var(--color-popover);
+  --color-popover-foreground: var(--color-popover-foreground);
+  --color-muted:            var(--color-muted);
+  --color-muted-foreground: var(--color-muted-foreground);
+  --color-secondary:        var(--color-secondary);
+  --color-secondary-foreground: var(--color-secondary-foreground);
+  --color-border:           var(--color-border);
+  --color-input:            var(--color-input);
+  --color-ring:             var(--color-ring);
+  --color-primary:          var(--color-primary);
+  --color-primary-foreground: var(--color-primary-foreground);
+  --color-primary-hover:    var(--color-primary-hover);
+  --color-primary-active:   var(--color-primary-active);
+  --color-primary-subtle:   var(--color-primary-subtle);
+  --color-primary-light:    var(--color-primary-light);
+  --color-accent:           var(--color-accent);
+  --color-accent-foreground: var(--color-accent-foreground);
+  --color-text-secondary:   var(--color-text-secondary);
+  --color-text-muted:       var(--color-text-muted);
+  --color-success:          var(--color-success);
+  --color-warning:          var(--color-warning);
+  --color-destructive:      var(--color-destructive);
+  --color-destructive-foreground: var(--color-destructive-foreground);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/*  CUSTOM UTILITIES                                                            */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+@layer utilities {
+  .layout-header-offset { padding-top: 4rem; }
+  .layout-sidebar-offset { padding-left: 16rem; }
+
+  /* Glassmorphism */
+  .glass {
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .glass-card {
+    background: color-mix(in srgb, var(--color-surface-card) 80%, transparent);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--color-border-subtle);
+  }
+
+  .glass-panel {
+    background: color-mix(in srgb, var(--color-surface-elevated) 70%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--color-border-subtle);
+  }
+
+  /* Background motifs */
+  .bg-dot-pattern {
+    background-image: radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .bg-grid-pattern {
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  /* Hero gradient — uses theme glow color */
+  .hero-gradient {
+    background:
+      radial-gradient(ellipse 70% 50% at 50% -10%, var(--hero-glow-color), transparent 75%),
+      var(--color-background);
+  }
+
+  .accent-gradient {
+    background:
+      radial-gradient(circle at 80% 20%, color-mix(in srgb, var(--color-primary) 10%, transparent), transparent 45%),
+      radial-gradient(circle at 20% 80%, color-mix(in srgb, var(--color-primary) 12%, transparent), transparent 50%),
+      var(--color-background);
+  }
+
+  /* Brand gradient text */
+  .brand-gradient-text {
+    background: linear-gradient(135deg, var(--color-foreground) 0%, var(--color-text-secondary) 50%, var(--color-primary-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .brand-gradient-text-vivid {
+    background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 50%, var(--color-primary-hover) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Glow effects */
+  .glow-brand {
+    box-shadow: 0 0 24px -3px var(--glow-primary);
+  }
+
+  .glow-brand-strong {
+    box-shadow: 0 0 24px -3px var(--glow-primary-strong);
+  }
+
+  .glow-emerald {
+    box-shadow: 0 0 20px -3px rgba(16,185,129,0.35);
+  }
+
+  .glow-amber {
+    box-shadow: 0 0 20px -3px rgba(245,158,11,0.35);
+  }
+
+  /* Card interaction */
+  .card-lift {
+    transition:
+      transform 0.2s cubic-bezier(0.16,1,0.3,1),
+      border-color 0.2s ease,
+      box-shadow 0.2s cubic-bezier(0.16,1,0.3,1);
+  }
+
+  .card-lift:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--color-primary) 45%, transparent);
+    box-shadow: 0 16px 36px -12px rgba(0,0,0,0.7), 0 0 16px -3px var(--glow-primary);
+  }
+
+  /* Sidebar */
+  .sidebar-scroll {
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-gutter: stable;
+  }
+
+  /* Status Indicators */
+  .status-live {
+    background: var(--color-success-muted);
+    color: var(--color-success);
+    border: 1px solid color-mix(in srgb, var(--color-success) 35%, transparent);
+  }
+
+  .status-upcoming {
+    background: rgba(56,189,248,0.15);
+    color: #38bdf8;
+    border: 1px solid rgba(56,189,248,0.35);
+  }
+
+  .status-completed {
+    background: rgba(148,163,184,0.15);
+    color: #cbd5e1;
+    border: 1px solid rgba(148,163,184,0.3);
+  }
+
+  .status-draft {
+    background: var(--color-warning-muted);
+    color: var(--color-warning);
+    border: 1px solid color-mix(in srgb, var(--color-warning) 35%, transparent);
+  }
+
+  /* Logo image sizing */
+  .logo-img {
+    height: 2rem;
+    width: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  .logo-img-lg {
+    height: 2.75rem;
+    width: auto;
+    object-fit: contain;
+    display: block;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/*  ANIMATIONS                                                                 */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseGlow {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50%     { opacity: 0.6; transform: scale(1.05); }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.25s cubic-bezier(0.16,1,0.3,1) forwards;
+  }
+  .animate-pulse-glow {
+    animation: pulseGlow 2.5s ease-in-out infinite;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════ */
+/*  LIGHT MODE UTILITY ADAPTATIONS                                              */
+/*  Ensures existing dark utility classes map gracefully in light mode         */
+/* ═══════════════════════════════════════════════════════════════════════════ */
+[data-mode="light"] {
+  /* Scrollbars in light mode */
+  & ::-webkit-scrollbar-track { background: var(--color-background); }
+  & ::-webkit-scrollbar-thumb { background: var(--color-border); }
+  & ::-webkit-scrollbar-thumb:hover { background: var(--color-muted-foreground); }
+}
+
+[data-mode="light"] .glass {
+  background: color-mix(in srgb, var(--color-background) 88%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+[data-mode="light"] .glass-card {
+  background: color-mix(in srgb, var(--color-surface-card) 90%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--color-border);
+}
+
+[data-mode="light"] .glass-panel {
+  background: color-mix(in srgb, var(--color-surface-card) 95%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+}
+
+[data-mode="light"] .bg-dot-pattern {
+  background-image: radial-gradient(rgba(0, 0, 0, 0.07) 1px, transparent 1px);
+}
+
+[data-mode="light"] .bg-grid-pattern {
+  background-image:
+    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+}
+
+[data-mode="light"] .card-lift:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--color-primary) 50%, transparent);
+  box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.10), 0 0 12px -3px var(--glow-primary);
+}
+
+/* Light mode text color adaptations for legacy dark Tailwind utility classes */
+[data-mode="light"] .text-slate-100,
+[data-mode="light"] .text-slate-200 {
+  color: var(--color-foreground);
+}
+
+[data-mode="light"] .text-slate-300 {
+  color: var(--color-text-secondary);
+}
+
+[data-mode="light"] .text-slate-400 {
+  color: var(--color-text-muted);
+}
+
+[data-mode="light"] .text-slate-500 {
+  color: var(--color-text-muted);
+}
+
+/* Headings with hardcoded text-white adapt to dark charcoal in light mode */
+[data-mode="light"] h1.text-white,
+[data-mode="light"] h2.text-white,
+[data-mode="light"] h3.text-white,
+[data-mode="light"] h4.text-white,
+[data-mode="light"] h5.text-white,
+[data-mode="light"] h6.text-white {
+  color: var(--color-foreground);
+}
+
+/* Text-white on body/spans adapts to foreground UNLESS inside primary/danger buttons or badges */
+[data-mode="light"] p.text-white {
+  color: var(--color-foreground);
+}
+
+[data-mode="light"] span.text-white:not([class*="bg-primary"]):not([class*="bg-destructive"]):not([class*="bg-rose"]):not([class*="bg-emerald"]):not([class*="bg-amber"]):not(button.bg-primary *):not([class*="badge"]) {
+  color: var(--color-foreground);
+}
+
+[data-mode="light"] .hover\:text-white:hover {
+  color: var(--color-foreground);
+}
+
+/* White opacity borders adapt to theme borders in light mode */
+[data-mode="light"] .border-white\/5,
+[data-mode="light"] .border-white\/10,
+[data-mode="light"] .border-white\/15,
+[data-mode="light"] .border-white\/20,
+[data-mode="light"] .border-white\/30 {
+  border-color: var(--color-border);
+}
+
+/* White opacity backgrounds adapt to subtle surface */
+[data-mode="light"] .bg-white\/5,
+[data-mode="light"] .bg-white\/10 {
+  background-color: var(--color-surface-subtle);
+}
+
+/* Hardcoded dark console background hexes adapt to card/subtle surfaces in light mode */
+[data-mode="light"] .bg-\[\#0B1020\],
+[data-mode="light"] .bg-\[\#0B1020\]\/40,
+[data-mode="light"] .bg-\[\#0F1522\],
+[data-mode="light"] .bg-\[\#0B0F19\],
+[data-mode="light"] .bg-\[\#121928\],
+[data-mode="light"] .bg-\[\#161F31\] {
+  background-color: var(--color-surface-card);
+}
+
+[data-mode="light"] .bg-\[\#070A12\],
+[data-mode="light"] .bg-\[\#050811\],
+[data-mode="light"] .bg-\[\#0A0F1D\] {
+  background-color: var(--color-surface-subtle);
+}
+
+[data-mode="light"] .hover\:bg-\[\#0F1522\]:hover,
+[data-mode="light"] .hover\:bg-\[\#070A12\]:hover {
+  background-color: var(--color-surface-highlight);
+}
+
+[data-mode="light"] .border-slate-800,
+[data-mode="light"] .border-slate-800\/80,
+[data-mode="light"] .border-slate-700,
+[data-mode="light"] .border-slate-700\/80 {
+  border-color: var(--color-border);
+}
+
+[data-mode="light"] .hover\:border-slate-700:hover,
+[data-mode="light"] .hover\:border-slate-600:hover {
+  border-color: var(--color-border-strong);
+}
+
+/* Smooth color & surface transitions when toggling mode */
+html,
+body,
+header,
+aside,
+main,
+nav {
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+}
