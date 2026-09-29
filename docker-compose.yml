@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"
+    restart: on-failure
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    restart: on-failure
+    environment:
+      - FLASK_APP=run.py
+      - FLASK_ENV=development
+      - DATABASE_URL=mysql+pymysql://dogfood_user:dogfood_pass@db:3306/dogfood_db
+      - SECRET_KEY=development-secret-key
+      - JWT_SECRET_KEY=development-jwt-secret
+    depends_on:
+      db:
+        condition: service_healthy
+    command: >
+      sh -c "
+      flask db upgrade &&
+      python seed_users.py &&
+      python seed_events.py &&
+      python seed_rubric.py &&
+      python seed_guidance.py &&
+      gunicorn --bind 0.0.0.0:8000 run:app
+      "
+
+  db:
+    image: mysql:8.4
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_DATABASE=dogfood_db
+      - MYSQL_USER=dogfood_user
+      - MYSQL_PASSWORD=dogfood_pass
+      - MYSQL_ROOT_PASSWORD=root_pass
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  db_data:
